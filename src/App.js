@@ -1,99 +1,73 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-import React, { useState } from "react";
 import "./App.css";
+import React from 'react';
 
-const TicTacToe = () => {
-  const [player, setPlayer] = useState("X");
-  const [fieldValues, setFieldValues] = useState(["", "", "", "", "", "", "", "", ""]);
-  const [gameover, setGameover] = useState(false);
-
-  const handleFieldClick = (index, value) => {
-    let fieldValuesCopy = [...fieldValues];
-    if (value === "" && gameover === false) {
-      fieldValuesCopy[index] = player;
-      setFieldValues(fieldValuesCopy);
-      setPlayer(player === "X" ? "O" : "X");
-    }
-    let winner = whoIsWinner(fieldValuesCopy);
-    if (winner === "X" || winner === "O") {
-      setGameover(true);
-    }
-  };
-
-  const whoIsWinner = (array) => {
-    if (
-      (array[0] !== "" &&
-        array[0] === array[1] &&
-        array[0] === array[2]) ||
-      (array[3] !== "" &&
-        array[3] === array[4] &&
-        array[3] === array[5]) ||
-      (array[6] !== "" &&
-        array[6] === array[7] &&
-        array[6] === array[8]) ||
-      (array[0] !== "" &&
-        array[0] === array[3] &&
-        array[0] === array[6]) ||
-      (array[1] !== "" &&
-        array[1] === array[4] &&
-        array[1] === array[7]) ||
-      (array[2] !== "" &&
-        array[2] === array[5] &&
-        array[2] === array[8]) ||
-      (array[0] !== "" &&
-        array[0] === array[4] &&
-        array[0] === array[8]) ||
-      (array[2] !== "" &&
-        array[2] === array[4] &&
-        array[2] === array[6])
-    ) {
-      return array[0];
-    } else {
-      return "";
-    }
-  };
-
-  const startNewGame = () => {
-    setPlayer("X");
-    setFieldValues(["", "", "", "", "", "", "", "", ""]);
-    setGameover(false);
-  };
-
-return (
-    <div className="deck">
-      { !gameover && <div className="status">Ходит игрок {player}</div> }
-      { gameover && <div className="status">Игрок {whoIsWinner(fieldValues)} выиграл!</div> }
-      <div className="field">
-        { fieldValues.map((value, index) => (
-          <div className="field__cell" onClick={() => handleFieldClick(index, value)}>{value}</div>
-        )) }
-      </div>
-      <button onClick={startNewGame} className="field__btn">Начать заново</button>
-    </div>
-  );
+const initialState = {
+    cells: Array(9).fill(null),
+    currentPlayer: 'X',
+    winner: null
 };
 
-export default TicTacToe;
+export default class TicTacToe extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = initialState;
+    }
+
+    handleCellClick(index) {
+        if (this.state.cells[index] === null && !this.state.winner) {
+            this.state.cells.splice(index, 1, this.state.currentPlayer);
+            this.setState({
+                cells: this.state.cells,
+                currentPlayer: this.state.currentPlayer === 'X' ? 'O' : 'X',
+            });
+
+            const winningConditions = [
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+                [0, 4, 8],
+                [2, 4, 6]
+            ];
+
+            for (let i = 0; i < winningConditions.length; i++) {
+                if (this.state.cells[winningConditions[i][0]] &&
+                    this.state.cells[winningConditions[i][0]] === this.state.cells[winningConditions[i][1]] &&
+                    this.state.cells[winningConditions[i][1]] === this.state.cells[winningConditions[i][2]]) {
+                    this.setState({
+                        winner: this.state.cells[winningConditions[i][0]]
+                    });
+                    return;
+                } 
+            }
+        }
+    }
+
+    render() {
+        return ( 
+            <div className="playground">
+                <div className="game-status">
+                    {
+                        this.state.winner ? 
+                        `The winner is: ${this.state.winner}` : 
+                        `Current Player: ${this.state.currentPlayer}`
+                    }
+                </div>
+                <div className="board">
+                    {
+                        this.state.cells.map((cell, index) => 
+                            <div className="cell"
+                                 key={index}
+                                 onClick = {() => this.handleCellClick(index)}>
+                            {cell}
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+        )
+    }
+}
