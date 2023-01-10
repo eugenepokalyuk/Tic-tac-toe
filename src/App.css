@@ -1,61 +1,31 @@
-/* #region [ old style ] */
-.field {
-  text-align: center;
-  display: grid;
-  grid-template-columns: 50px 50px 50px;
-}
-.field__cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 48px;
-
-  width: 50px;
-  height: 50px;
-  margin-left: 10px;
-}
-
-.field__cell:nth-child(1n) {
-  background: #ccc;
-}
-
-.field__cell:nth-child(2n) {
-  background: #999;
-}
-
-.deck {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  background-color: antiquewhite;
-}
-/* #endregion */
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
 html {
   background-color: lightcyan;
 }
+
 .playground {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .board {
   display: grid;
   grid-template-columns: 110px 110px 110px;
 }
+
 .row {
   display: flex;
   justify-content: center;
   width: 100%;
   height: 25%;
 }
+
 .cell {
   width: 100px;
   height: 100px;
-  /* background-color: cyan; */
 
   margin-top: 10px;
   border-radius: 10px;
@@ -68,53 +38,31 @@ html {
 
   cursor: pointer;
 }
+
 .cell:nth-child(1n) {
-  /* background-color: #ccc; */
   background-color: rgb(173, 216, 230);
 }
-.cell:nth-child(2n) {
-  /* background-color: #ddd; */
-  /* background-color: lightyellow; */
-  background-color: rgb(127, 183, 202);
 
-  /* background-color: rgb(255, 182, 193, 0.5); */
+.cell:nth-child(2n) {
+  background-color: rgb(127, 183, 202);
 }
+
 .game-status {
-  /* font-size: 102px; */
   font-size: 48px;
-  font-family: 'Indie Flower', cursive; 
+  font-family: 'Indie Flower', cursive;
 }
-/* .cell:nth-child(3) {
-  background-color: #ccc;
-}
-.cell:nth-child(1) {
-  background-color: #ddd;
-}
-.cell:nth-child(2) {
-  background-color: #ccc;
-}
-.cell:nth-child(3) {
-  background-color: #ddd;
-}
-.cell:nth-child(1) {
-  background-color: #ccc;
-}
-.cell:nth-child(2) {
-  background-color: #ddd;
-}
-.cell:nth-child(3) {
-  background-color: #ccc;
-} */
 
 @media only screen and (min-width: 480px) {
   .board {
     display: grid;
     grid-template-columns: 160px 160px 160px;
   }
+
   .cell {
     width: 150px;
     height: 150px;
   }
+
   .game-status {
     font-size: 102px;
   }

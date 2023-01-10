@@ -41,28 +41,28 @@ export default class TicTacToe extends React.Component {
                         winner: this.state.cells[winningConditions[i][0]]
                     });
                     return;
-                } 
+                }
             }
         }
     }
 
     render() {
-        return ( 
+        return (
             <div className="playground">
                 <div className="game-status">
                     {
-                        this.state.winner ? 
-                        `The winner is: ${this.state.winner}` : 
-                        `Current Player: ${this.state.currentPlayer}`
+                        this.state.winner ?
+                            `The winner is: ${this.state.winner}` :
+                            `Current Player: ${this.state.currentPlayer}`
                     }
                 </div>
                 <div className="board">
                     {
-                        this.state.cells.map((cell, index) => 
+                        this.state.cells.map((cell, index) =>
                             <div className="cell"
-                                 key={index}
-                                 onClick = {() => this.handleCellClick(index)}>
-                            {cell}
+                                key={index}
+                                onClick={() => this.handleCellClick(index)}>
+                                {cell}
                             </div>
                         )
                     }
