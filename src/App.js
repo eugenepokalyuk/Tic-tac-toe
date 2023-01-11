@@ -67,8 +67,9 @@ export default class TicTacToe extends React.Component {
                         )
                     }
                 </div>
-                <div>
+                <div style={{ "textAlign": "center" }}>
                     <h3>To start over, refresh the page</h3>
+                    <a href="/">Start new game</a>
                 </div>
             </div>
         )

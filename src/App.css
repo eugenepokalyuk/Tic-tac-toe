@@ -42,7 +42,19 @@ html {
 h3 {
   font-family: 'Indie Flower', cursive;
 }
-
+a {
+  background: rgb(127, 183, 202);
+  color: #fff;
+  padding: 10px 14px;
+  font-size: 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-family: 'Indie Flower', cursive;
+}
+a:hover {
+  background: rgb(173, 216, 230);
+  color: #000;
+}
 .cell:nth-child(1n) {
   background-color: rgb(173, 216, 230);
 }
