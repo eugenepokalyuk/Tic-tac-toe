@@ -67,6 +67,9 @@ export default class TicTacToe extends React.Component {
                         )
                     }
                 </div>
+                <div>
+                    <h3>To start over, refresh the page</h3>
+                </div>
             </div>
         )
     }

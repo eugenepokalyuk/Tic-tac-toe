@@ -39,6 +39,10 @@ html {
   cursor: pointer;
 }
 
+h3 {
+  font-family: 'Indie Flower', cursive;
+}
+
 .cell:nth-child(1n) {
   background-color: rgb(173, 216, 230);
 }
